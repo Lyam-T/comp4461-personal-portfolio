@@ -1,30 +1,28 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <v-app>
+    <v-main>
+      <v-container class="fill-height">
+        <v-row class="fill-height" align="center" justify="center">
+          <v-col cols="12" sm="10" md="8" lg="6">
+            <v-card class="pa-4 mx-auto" elevation="2" max-width="800">
+              <v-card-title>COMP4461 Personal Portfolio</v-card-title>
+              <v-card-subtitle style="white-space: normal; overflow-wrap: anywhere; word-break: break-word;">
+                Welcome to my personal portfolio website! This is a showcase of all my projects done during
+                my studies in HKUST COMP4461 Human Computer Interaction course.
+              </v-card-subtitle>
+              <v-card-text>
+                Currently there is no any content here, please check back later.
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+
+    <FooterCredit author="Lyam Tang" />
+  </v-app>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<script setup>
+import FooterCredit from './components/FooterCredit.vue'
+</script>
