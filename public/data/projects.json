@@ -1,0 +1,25 @@
+[
+  {
+    "title": "HRI for Diaster Management",
+    "subtitle": "Human Computer Interaction Project",
+    "description": "An innovative HCI project exploring user experience and interface design principles.",
+    "imageSrc": "/images/project1-placeholder.jpg",
+    "placeholderIcon": "mdi-image",
+    "statusIcon": "⏰",
+    "status": "Coming Soon...",
+    "buttonText": "Click Me",
+    "disabled": true
+  },
+  {
+    "title": "XR for Local Community",
+    "subtitle": "Human Computer Interaction Project",
+    "description": "A comprehensive study on human-computer interaction methodologies and user research.",
+    "imageSrc": "/images/project2-placeholder.jpg",
+    "placeholderIcon": "mdi-video",
+    "statusIcon": "⏰",
+    "status": "Coming Soon...",
+    "buttonText": "Click Me",
+    "disabled": true
+  }
+]
+
