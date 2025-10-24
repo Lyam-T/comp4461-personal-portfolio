@@ -1,25 +1,114 @@
 [
   {
+    "id": "hri-disaster",
     "title": "HRI for Diaster Management",
-    "subtitle": "Human Computer Interaction Project",
-    "description": "An innovative HCI project exploring user experience and interface design principles.",
-    "imageSrc": "/images/project1-placeholder.jpg",
+    "subtitle": "Earthquake Emergency Shelter Finder",
+    "description": "This is an application that designed for tourist in Japan to help finding nearby emergency shelters during earthquakes.",
+    "detailedDescription": "This comprehensive Human-Robot Interaction project focuses on developing intuitive interfaces for disaster management scenarios. The system enables seamless communication between human operators and rescue robots in emergency situations, potentially saving lives through improved coordination and response times in earthquake-affected areas of Japan.",
+    "imageSrc": "/comp4461-personal-portfolio/images/logo.png",
     "placeholderIcon": "mdi-image",
-    "statusIcon": "⏰",
-    "status": "Coming Soon...",
+    "statusIcon": "🚀",
+    "status": "Completed",
     "buttonText": "Click Me",
-    "disabled": true
+    "disabled": false,
+    "url": "/project/hri-disaster",
+    "demoUrl": "https://www.youtube.com/watch?v=A-kRNP1Ftwc",
+    "githubUrl": "https://github.com/your-username/hri-disaster",
+    "technologies": ["Svelte", "TS/JS", "HKUST AZURE AI API", "Prompt Engineering"],
+    "features": [
+      "Artificial Intelligence Integration",
+      "Context Awareness",
+      "Suggested Prompts"
+    ],
+    "learnings": [
+      {
+        "symbol": "🤖",
+        "title": "Human Robot Interaction Design",
+        "description": "Even for a simple chatbot/ voice assistant, we still have many factors to consider. For example, context awareness how could we store and further prompt the user data into the  model to get a sequential response. Also, how could we make sure our model will be prompted to reply in a efficient, calm and trustworthy way under a emergency situation. "
+
+
+      },
+      {
+        "symbol": "🔄",
+        "title": "Design Cycle",
+        "description": "I have experienced the full design cycle from research, ideation, prototyping, interviewing and iterating. Each stage has its own challenges yet one of the most important part is that there is that designer bias that I have encountered with. As that I thought the darker background will instead make the text stands out more, but the user testing shows that most of the users prefer the white background instead."
+      },
+      {
+        "symbol": "🎯",
+        "title": "User-Centered Design",
+        "description": "When come to user-centered design, I have learned that what does \"design a right thing right\" meant literally. Our solution is not only to design a good UI but to solve the right problem. For example, instead of a chatbot, we should use a voice assistant feature as the user are occupied with other tasks for their eye during an earthquake."
+      }
+    ],
+    "timeline": [
+      {
+        "date": "1 Oct 2025",
+        "title": "Research & Planning",
+        "description": "Studied earthquake emergency protocols in Japan and user needs analysis"
+      },
+      {
+        "date": "3 Oct 2025",
+        "title": "Ideation",
+        "description": "Brainstormed features and functionalities for the application"
+      },
+      {
+        "date": "13 Oct 2025",
+        "title": "Prototype Development",
+        "description": "Made our vertical prototype of the chatbot with Svelte and integrated HKUST AZURE AI API"
+      },
+      {
+        "date": "20 Oct 2024",
+        "title": "Interview & Feedback",
+        "description": "Done with user testing and collected feedback for improvements"
+      }
+    ]
   },
   {
+    "id": "xr-community",
     "title": "XR for Local Community",
     "subtitle": "Human Computer Interaction Project",
     "description": "A comprehensive study on human-computer interaction methodologies and user research.",
-    "imageSrc": "/images/project2-placeholder.jpg",
+    "detailedDescription": "An Extended Reality (XR) application designed to strengthen local community connections through immersive virtual experiences. This project combines VR, AR, and mixed reality technologies to create shared spaces where community members can interact, collaborate, and engage in local activities.",
+    "imageSrc": "/comp4461-personal-portfolio/images/project2-placeholder.jpg",
     "placeholderIcon": "mdi-video",
     "statusIcon": "⏰",
     "status": "Coming Soon...",
     "buttonText": "Click Me",
-    "disabled": true
+    "disabled": true,
+    "url": "/project/xr-community",
+    "technologies": ["Unity", "C#", "ARCore", "ARKit", "WebXR", "Node.js"],
+    "features": [
+      "Virtual community spaces",
+      "AR-enhanced local landmarks",
+      "Collaborative planning tools",
+      "Community event visualization",
+      "Cross-platform compatibility"
+    ],
+    "challenges": [
+      {
+        "title": "Device Compatibility",
+        "description": "Ensuring XR experiences work across different devices and platforms used by community members."
+      },
+      {
+        "title": "User Adoption",
+        "description": "Making XR technology approachable for users of all ages and technical backgrounds."
+      }
+    ],
+    "timeline": [
+      {
+        "date": "Oct 2024",
+        "title": "Community Research",
+        "description": "Studying local community needs and preferences"
+      },
+      {
+        "date": "Nov 2024",
+        "title": "XR Development",
+        "description": "Building core XR experiences and interactions"
+      },
+      {
+        "date": "Dec 2024",
+        "title": "Community Testing",
+        "description": "Beta testing with local community groups"
+      }
+    ]
   }
 ]
-
