@@ -27,30 +27,50 @@
                 width="300"
                 :class="selectedClass"
                 @click="toggle"
-              >
+                style="display: flex; flex-direction: column;"
+            >
               <v-img
                   :src="project.imageSrc"
                   height="200"
-                  cover
+                  contain
+                  :aspect-ratio="16/9"
                   class="bg-grey-lighten-2"
+                  style="object-position: center center;"
               >
+                <!-- Status badge for actual images (top right corner) -->
+                <div v-if="hasActualImage(project)" class="position-absolute" style="top: 8px; right: 8px; z-index: 2;">
+                  <v-chip
+                    :color="getStatusChipColor(project.status)"
+                    size="small"
+                    variant="flat"
+                    class="text-white"
+                  >
+                    {{ project.statusIcon }} {{ project.status }}
+                  </v-chip>
+                </div>
+                <!-- Overlay version (for placeholders) -->
                 <template v-slot:placeholder>
                   <div class="d-flex align-center justify-center fill-height">
                     <v-icon size="64" color="grey">{{ project.placeholderIcon }}</v-icon>
+                    <!-- Show status overlay only when no actual image (using placeholder) -->
+                    <div class="d-flex align-center justify-center fill-height position-absolute" style="top: 0; left: 0; right: 0; bottom: 0;">
+                      <div class="text-center">
+                        <p class="text-h5 text-grey mb-1">{{ project.statusIcon }}</p>
+                        <p class="text-h6 text-grey">{{ project.status }}</p>
+                      </div>
+                    </div>
                   </div>
                 </template>
-                <div class="d-flex align-center justify-center fill-height position-absolute" style="top: 0; left: 0; right: 0; bottom: 0;">
-                  <div class="text-center">
-                    <p class="text-h5 text-grey mb-1">{{ project.statusIcon }}</p>
-                    <p class="text-h6 text-grey">{{ project.status }}</p>
-                  </div>
-                </div>
               </v-img>
+
               <v-card-title>{{ project.title }}</v-card-title>
+
               <v-card-subtitle>{{ project.subtitle }}</v-card-subtitle>
-              <v-card-text>
+
+              <v-card-text class="text-left" style="flex-grow: 1;">
                 <p>{{ project.description }}</p>
               </v-card-text>
+
               <v-card-actions class="pa-4">
                 <v-btn
                     color="primary"
@@ -72,6 +92,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 
 interface Project {
   title: string;
@@ -85,6 +106,8 @@ interface Project {
   disabled: boolean;
   url?: string;
 }
+
+const router = useRouter();
 
 // Reactive variable for selected project (for slide group)
 const selectedProject = ref<number | null>(null);
@@ -170,11 +193,24 @@ onMounted(() => {
 
 // Function to handle project clicks
 const handleProjectClick = (project: Project) => {
-  if (!project.disabled && project.url) {
-    // Navigate to project URL or handle click action
-    console.log(`Navigating to: ${project.url}`);
-    // You can add router navigation here later
-    // router.push(project.url);
+  if (!project.disabled) {
+    // Create project ID from title
+    let projectId = '';
+    if (project.title === "HRI for Diaster Management") {
+      projectId = 'hri-disaster';
+    } else if (project.title === "XR for Local Community") {
+      projectId = 'xr-community';
+    } else if (project.title === "Project 3") {
+      projectId = 'project3';
+    } else if (project.title === "Project 4") {
+      projectId = 'project4';
+    } else {
+      // Fallback: create ID from title
+      projectId = project.title.toLowerCase().replace(/\s+/g, '-');
+    }
+
+    // Navigate to project detail page
+    router.push(`/project/${projectId}`);
   }
 };
 
@@ -186,6 +222,27 @@ const addProject = (newProject: Project) => {
 // Helper function to remove projects (for future use)
 const removeProject = (index: number) => {
   projects.value.splice(index, 1);
+};
+
+// Check if project has an actual image (not a placeholder)
+const hasActualImage = (project: Project) => {
+  return project.imageSrc && !project.imageSrc.includes('placeholder');
+};
+
+// Get status chip color based on project status
+const getStatusChipColor = (status: string) => {
+  switch (status.toLowerCase()) {
+    case 'completed':
+      return 'success'
+    case 'in progress':
+    case 'in progress...':
+      return 'warning'
+    case 'coming soon':
+    case 'coming soon...':
+      return 'info'
+    default:
+      return 'grey'
+  }
 };
 </script>
 
