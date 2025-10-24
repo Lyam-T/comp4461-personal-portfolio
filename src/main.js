@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import router from './router'
+import VueFeather from 'vue-feather'
 
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -12,4 +14,6 @@ const vuetify = createVuetify({
     directives,
 })
 
-createApp(App).use(vuetify).mount('#app')
+const app = createApp(App)
+app.component(VueFeather.name, VueFeather)
+app.use(vuetify).use(router).mount('#app')

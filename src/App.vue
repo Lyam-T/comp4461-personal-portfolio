@@ -1,20 +1,24 @@
 <template>
   <v-app>
     <v-main>
-      <v-container class="pa-4">
-        <div
-          class="intro-wrapper"
-          :class="{ 'intro-visible': showIntro }"
-        >
-          <Intro />
-        </div>
-        <div
-          class="proj-wrapper"
-          :class="{ 'proj-visible': showProj }"
-        >
-          <Proj />
-        </div>
-      </v-container>
+      <!-- Show home content when on root route, otherwise show router-view -->
+      <div v-if="$route.path === '/'">
+        <v-container class="pa-4">
+          <div
+            class="intro-wrapper"
+            :class="{ 'intro-visible': showIntro }"
+          >
+            <Intro />
+          </div>
+          <div
+            class="proj-wrapper"
+            :class="{ 'proj-visible': showProj }"
+          >
+            <Proj />
+          </div>
+        </v-container>
+      </div>
+      <router-view v-else />
     </v-main>
     <FooterCredit author="Lyam Tang" />
   </v-app>
@@ -40,7 +44,7 @@ onMounted(() => {
   // Show projects after intro animation completes
   setTimeout(() => {
     showProj.value = true
-  }, 400) // 1200ms = 200ms delay + 1000ms for intro to settle
+  }, 400)
 })
 </script>
 
@@ -49,7 +53,7 @@ onMounted(() => {
 .intro-wrapper {
   opacity: 0;
   transform: translateY(-30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .intro-visible {
@@ -57,11 +61,11 @@ onMounted(() => {
   transform: translateY(0);
 }
 
-/* Project component animation */
+/* Projects component animation */
 .proj-wrapper {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .proj-visible {
