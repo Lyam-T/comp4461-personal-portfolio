@@ -314,19 +314,46 @@ const showTimelineSection = ref(false)
 
 const projectId = computed(() => route.params.id as string)
 
-const loadProject = async () => {
+const loadProject = async (retryCount = 0) => {
   loading.value = true
   try {
-    const response = await fetch('/comp4461-personal-portfolio/data/projects.json')
+    const url = 'https://lyam-t.github.io/comp4461-personal-portfolio/data/projects.json'
+    console.log(`Attempting to fetch from: ${url} (attempt ${retryCount + 1})`)
+
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
     const projects = await response.json()
+    console.log('Projects loaded successfully:', projects)
+
     project.value = projects.find(p => p.id === projectId.value)
 
-    // Initialize scroll state after data is loaded
+    if (!project.value) {
+      console.warn(`Project with id "${projectId.value}" not found`)
+    }
+
+    // Initialize scroll state and observers after data is loaded
     nextTick(() => {
       updateScrollButtons()
+      // Set up intersection observers after DOM is fully rendered with data
+      setupScrollAnimations()
     })
   } catch (error) {
-    console.error('Error loading project:', error)
+    console.error(`Error loading project (attempt ${retryCount + 1}):`, error)
+
+    // Retry up to 3 times with exponential backoff
+    if (retryCount < 2) {
+      const delay = Math.pow(2, retryCount) * 1000 // 1s, 2s delays
+      console.log(`Retrying in ${delay}ms...`)
+      setTimeout(() => loadProject(retryCount + 1), delay)
+      return
+    }
+
+    // If all retries failed, show error or fallback
+    console.error('All retry attempts failed - could not load project data')
   } finally {
     loading.value = false
   }
@@ -357,9 +384,6 @@ const getStatusChipColor = (status: string): string => {
 
 onMounted(() => {
   loadProject()
-
-  // Set up intersection observers for scroll-based animations
-  setupScrollAnimations()
 })
 
 // Function to setup scroll-based animations using Intersection Observer

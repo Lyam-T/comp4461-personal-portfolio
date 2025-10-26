@@ -117,22 +117,33 @@ const projects = ref<Project[]>([]);
 const loading = ref(true);
 
 // Fetch projects from public directory
-const loadProjects = async () => {
+const loadProjects = async (retryCount = 0) => {
   try {
-    console.log('Attempting to fetch projects...');
-    // Fixed: Use the correct base path that matches vite.config.js
-    const response = await fetch('/comp4461-personal-portfolio/data/projects.json');
+    const url = 'https://lyam-t.github.io/comp4461-personal-portfolio/data/projects.json'
+    console.log(`Attempting to fetch projects from: ${url} (attempt ${retryCount + 1})`)
+
+    const response = await fetch(url)
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const projectsData = await response.json();
-    console.log('Projects loaded:', projectsData);
+    console.log('Projects loaded successfully:', projectsData);
     projects.value = projectsData;
     loading.value = false;
   } catch (error) {
-    console.error('Failed to load projects:', error);
+    console.error(`Failed to load projects (attempt ${retryCount + 1}):`, error);
+
+    // Retry up to 3 times with exponential backoff
+    if (retryCount < 2) {
+      const delay = Math.pow(2, retryCount) * 1000 // 1s, 2s delays
+      console.log(`Retrying in ${delay}ms...`)
+      setTimeout(() => loadProjects(retryCount + 1), delay)
+      return
+    }
+
+    console.error('All retry attempts failed, using fallback data')
     // Fallback data if fetch fails - ALL 4 projects
     projects.value = [
       {
