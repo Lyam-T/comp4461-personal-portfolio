@@ -39,6 +39,10 @@
         "description": "When come to user-centered design, I have learned that what does \"design a right thing right\" meant literally. Our solution is not only to design a good UI but to solve the right problem. For example, instead of a chatbot, we should use a voice assistant feature as the user are occupied with other tasks for their eye during an earthquake."
       }
     ],
+    "contribution": [
+      "Participated in ideation and brainstorming sessions to define project scope and features.",
+      "Built the fully functional vertical prototype of the chatbot using Svelte framework."
+    ],
     "timeline": [
       {
         "date": "1 Oct 2025",
