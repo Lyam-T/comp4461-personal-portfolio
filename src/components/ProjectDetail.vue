@@ -195,6 +195,29 @@
       </v-col>
     </v-row>
 
+    <v-row v-if="project && project.contribution" class="mb-6">
+      <v-col cols="12">
+        <div
+          class="contribution-section"
+          :class="{ 'section-visible': showContributionSection }"
+        >
+         <v-card elevation="0" class="pa-6">
+            <h2 class="text-h4 mb-4 text-info">My Contributions</h2>
+           <v-list dense>
+             <v-list-item v-for="project in project.contribution" class="px-0">
+               <v-list-item-content class="d-flex align-center justify-center full-width">
+                 <vue-feather type="star" size="16" class="text-warning mr-2"></vue-feather>
+                 <v-list-item-title class="text-body-1">
+                   {{ project }}
+                 </v-list-item-title>
+               </v-list-item-content>
+             </v-list-item>
+           </v-list>
+         </v-card>
+        </div>
+      </v-col>
+    </v-row>
+
     <!-- Timeline Section -->
     <v-row v-if="project && project.timeline" class="mb-6">
       <v-col cols="12">
@@ -286,6 +309,7 @@ const loading = ref(true)
 
 const showIntroSection = ref(false)
 const showDiarySection = ref(false)
+const showContributionSection = ref(false)
 const showTimelineSection = ref(false)
 
 const projectId = computed(() => route.params.id as string)
@@ -355,6 +379,8 @@ const setupScrollAnimations = () => {
           showIntroSection.value = true
         } else if (target.classList.contains('diary-section')) {
           showDiarySection.value = true
+        } else if (target.classList.contains('contribution-section')) {
+          showContributionSection.value = true
         } else if (target.classList.contains('timeline-section')) {
           showTimelineSection.value = true
         }
@@ -369,10 +395,12 @@ const setupScrollAnimations = () => {
   setTimeout(() => {
     const introSection = document.querySelector('.intro-section')
     const diarySection = document.querySelector('.diary-section')
+    const contributionSection = document.querySelector('.contribution-section')
     const timelineSection = document.querySelector('.timeline-section')
 
     if (introSection) observer.observe(introSection)
     if (diarySection) observer.observe(diarySection)
+    if (contributionSection) observer.observe(contributionSection)
     if (timelineSection) observer.observe(timelineSection)
   }, 100) // Small delay to ensure DOM is rendered
 }
@@ -414,6 +442,7 @@ onBeforeUnmount(() => {
 
 .intro-section,
 .diary-section,
+.contribution-section,
 .timeline-section {
   opacity: 0;
   transform: translateY(20px);
